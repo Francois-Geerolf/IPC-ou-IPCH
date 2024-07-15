@@ -11,9 +11,6 @@ table1_idbanks <- c("001759970", # Indice des prix à la consommation - Base 201
                     "001762489" # Indice des prix à la consommation harmonisé annuel - Base 2015 - Ensemble des ménages - France - Nomenclature Coicop : Ensemble harmonisé 
                     )
 
-
-
-
 table1 <- paste(table1_idbanks, collapse = "+") |>
   paste0("https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/", i = _) |>
   rsdmx::readSDMX() |>
@@ -30,6 +27,9 @@ table1 <- paste(table1_idbanks, collapse = "+") |>
                    `Glissement sur 3 ans` = `2024-06`/`2021-06`-1,
                    `Glissement sur 25 ans` = `2024-06`/`1999-06`-1)
   
+saveRDS(table1, file = "table1.rds")
+
+readRDS("table1.rds")
 
 table1 |>
   gt::gt() |>
