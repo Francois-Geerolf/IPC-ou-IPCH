@@ -11,7 +11,10 @@ Le dépôt contient de quoi répliquer les figures et les données de la [note e
 ![Table 1](table1.png)
 
 - Figure 1 : Poids et évolution de l’indice santé dans l’IPC et dans l’IPCH
-- Figure 2 : Évolution des salaires annuels « en euros constants » par catégorie socio-professionnelle, en utilisant l’inflation IPC et en utilisant l’inflation IPCH
+- Figure 2 : Évolution des salaires annuels « en euros constants » par catégorie socio-professionnelle, en utilisant l’inflation IPC et en utilisant l’inflation IPCH.  [code R](figure2.R)
+
+![Figure 2](figure2.png)
+
 - Figure A1 : Poids de l’enseignement dans l’IPC et dans l’IPCH
 - Figure A2 : Pouvoir d’achat du point d’indice net de la fonction publique, IPC vs. IPCH
 
