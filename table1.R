@@ -1,9 +1,10 @@
 rm(list = ls())
 
+# Texte
+
 # Table 1 
 
 ## Comparaison Juin 1999-2024 ---------
-
 
 table1_idbanks <- c("001759970", # Indice des prix à la consommation - Base 2015 - Ensemble des ménages - France - Ensemble
                     "001759971", # Indice des prix à la consommation harmonisé - Base 2015 - Ensemble des ménages - France - Nomenclature Coicop : Ensemble harmonisé
@@ -29,7 +30,7 @@ table1 <- paste(table1_idbanks, collapse = "+") |>
   
 saveRDS(table1, file = "table1.rds")
 
-readRDS("table1.rds")
+table1 <- readRDS("table1.rds")
 
 table1 |>
   gt::gt() |>
