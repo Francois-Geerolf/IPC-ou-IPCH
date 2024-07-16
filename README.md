@@ -10,7 +10,7 @@ Le dépôt contient de quoi répliquer les figures et les données de la [note e
 
 ![Table 1](table1.png)
 
-- Figure 1 : Poids et évolution de l’indice santé dans l’IPC et dans l’IPCH. [code R](table1.R)
+- Figure 1 : Poids et évolution de l’indice santé dans l’IPC et dans l’IPCH. [code R](figure1.R)
 
 ![Figure 1](figure1.png)
 
@@ -18,11 +18,11 @@ Le dépôt contient de quoi répliquer les figures et les données de la [note e
 
 ![Figure 2](figure2.png)
 
-- Figure A1 : Poids de l’enseignement dans l’IPC et dans l’IPCH. [code R](table1.R)
+- Figure A1 : Poids de l’enseignement dans l’IPC et dans l’IPCH. [code R](figureA1.R)
 
 ![FigureA1](figureA1.png)
 
-- Figure A2 : Pouvoir d’achat du point d’indice net de la fonction publique, IPC vs. IPCH. [code R](table1.R)
+- Figure A2 : Pouvoir d’achat du point d’indice net de la fonction publique, IPC vs. IPCH. [code R](figureA2.R)
 
 ![FigureA2](figureA2.png)
 
