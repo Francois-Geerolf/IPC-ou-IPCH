@@ -14,8 +14,7 @@ figure2 <- paste(figure2_idbanks, collapse = "+") |>
                                         T ~ "IPC"))
 
 figure2 %>%
-  mutate(date = paste0(TIME_PERIOD, "-01-01"),
-         date = as.Date(date))  |>
+  mutate(date = as.Date(paste0(TIME_PERIOD, "-01-01")))  |>
   filter(date >= as.Date("1996-01-01")) |>
   arrange(date) |>
   ggplot() + ylab("") + xlab("") + theme_minimal() +
