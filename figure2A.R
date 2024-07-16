@@ -32,5 +32,4 @@ figure1 %>%
   scale_y_continuous(breaks = 0.01*seq(0, 300, .1),
                      labels = percent_format(accuracy = .1))
 
-ggsave("figure1.pdf", width = 1.25*6, height = 1.25*3.375)
 ggsave("figure1.png", width = 1.25*6, height = 1.25*3.375)
