@@ -1,9 +1,9 @@
 library(tidyverse)
 
-figure1A_idbanks <- c("001762353", "001762354", "001762357", "001762360",
+figureA1_idbanks <- c("001762353", "001762354", "001762357", "001762360",
                      "001766350", "001766351", "001766355")
 
-figure1A <- paste(figure1A_idbanks, collapse = "+") |>
+figureA1 <- paste(figureA1_idbanks, collapse = "+") |>
   paste0("https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/", i = _) |>
   rsdmx::readSDMX() |>
   as_tibble() |>
@@ -13,7 +13,7 @@ figure1A <- paste(figure1A_idbanks, collapse = "+") |>
             `IPC ou IPCH ?` = case_when(grepl("harmonisé", TITLE_FR) ~ "IPCH",
                                         T ~ "IPC"))
 
-figure1A %>%
+figureA1 %>%
   mutate(date = as.Date(paste0(TIME_PERIOD, "-01-01")))  |>
   filter(date >= as.Date("1996-01-01")) |>
   arrange(date) |>
@@ -26,4 +26,5 @@ figure1A %>%
   scale_y_continuous(breaks = 0.01*seq(0, 300, .1),
                      labels = scales::percent_format(accuracy = .1))
 
-ggsave("figure1A.png", width = 1.25*6, height = 1.25*3.375)
+ggsave("figureA1.png", width = 1.25*6, height = 1.25*3.375)
+ggsave("figureA1.pdf", width = 1.25*6, height = 1.25*3.375)

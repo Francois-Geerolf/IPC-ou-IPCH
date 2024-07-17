@@ -20,9 +20,7 @@ table1 <- paste(table1_idbanks, collapse = "+") |>
             infl2022 = `2022`/`2021`-1,
             infl2023 = `2023`/`2022`-1,
             g3a = `2024-06`/`2021-06`-1,
-            g25a = `2024-06`/`1999-06`-1)
-
-table1 |>
+            g25a = `2024-06`/`1999-06`-1) |>
   gt::gt() |>
   gt::fmt_percent(
     columns = 2:5,
@@ -38,5 +36,13 @@ table1 |>
     infl2023 = gt::html("2023<br>Annuelle"),
     g3a = gt::html("Juin 2021 - Juin 2024<br>Glissement sur 3 ans"),
     g25a = gt::html("Juin 1999 - Juin 2024<br>Glissement sur 25 ans")
-  )  |>
+  )
+
+table1  |>
   gt::gtsave(filename = "table1.png")
+
+table1  |>
+  gt::gtsave(filename = "table1.pdf")
+
+system("pdfcrop table1.pdf table1.pdf")
+

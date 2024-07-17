@@ -54,3 +54,4 @@ figure2 %>%
   geom_hline(yintercept = 100, linetype = "dashed")
 
 ggsave("figure2.png", width = 1.25*6, height = 1.25*3.375)
+ggsave("figure2.pdf", width = 1.25*6, height = 1.25*3.375)

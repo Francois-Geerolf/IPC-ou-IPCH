@@ -53,3 +53,4 @@ figure1_B
 ggarrange(figure1_A, figure1_B, common.legend = T)
 
 ggsave("figure1.png", width = 1.25*6, height = 1.25*3.375)
+ggsave("figure1.pdf", width = 1.25*6, height = 1.25*3.375)
