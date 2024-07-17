@@ -53,10 +53,9 @@ net_brut_mensuel <- figureA2_idbanks |>
 figureA2 <- indicefp |>
   select(date, value = point_indice_en_euros) |>
   arrange(desc(date)) |>
-  complete(date = seq.Date(min(date), max(date), by = "day")) |>
+  complete(date = seq.Date(min(date), max(date), by = "month")) |>
   fill(value) |>
   left_join(IPC_ou_IPCH, by = "date") |>
-  filter(day(date) == 1) |>
   left_join(net_brut_mensuel, by = "date") |>
   filter(date >= min_date,
          date <= max_date) |>
