@@ -1,4 +1,4 @@
-# Inflation en France: IPC ou IPCH ?
+# Inflation en France : IPC ou IPCH ?
 
 Ce dépôt met à disposition des codes de réplication pour la [note en lien](https://fgeerolf.com/IPC-ou-IPCH.pdf), ainsi que des outils pour calculer des évolutions en euros constants à partir de l'IPCH, plutôt que de l'IPC.
 
