@@ -36,7 +36,8 @@ table1 <- paste(table1_idbanks, collapse = "+") |>
     infl2023 = gt::html("2023<br>Annuelle"),
     g3a = gt::html("Juin 2021 - Juin 2024<br>Glissement sur 3 ans"),
     g25a = gt::html("Juin 1999 - Juin 2024<br>Glissement sur 25 ans")
-  )
+  ) |>
+  gt::tab_footnote("Source: Insee, calculs de l'auteur")
 
 table1  |>
   gt::gtsave(filename = "table1.png")

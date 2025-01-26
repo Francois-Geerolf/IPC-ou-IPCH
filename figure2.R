@@ -31,7 +31,8 @@ figure2 <- figure2_idbanks |>
   select(-IDBANK) |>
   left_join(IPC_ou_IPCH, by = "TIME_PERIOD") |>
   mutate(date = as.Date(paste0(TIME_PERIOD, "-01-01"))) |>
-  filter(date >= as.Date("1996-01-01")) %>%
+  filter(date >= as.Date("1996-01-01"),
+         date <= as.Date("2022-01-01")) |>
   group_by(Metier) %>%
   arrange(date) %>%
   transmute(date,
@@ -51,7 +52,8 @@ figure2 %>%
   theme(legend.position = c(0.3, 0.8),
         legend.title = element_blank()) +
   scale_y_log10(breaks = seq(0, 200, 1)) +
-  geom_hline(yintercept = 100, linetype = "dashed")
+  geom_hline(yintercept = 100, linetype = "dashed") +
+  labs(caption = "Source: Insee, calculs de l'auteur")
 
-ggsave("figure2.png", width = 1.25*6, height = 1.25*3.375)
+ggsave("figure2.png", width = 1.25*6, height = 1.25*3.375, bg = "white")
 ggsave("figure2.pdf", width = 1.25*6, height = 1.25*3.375)

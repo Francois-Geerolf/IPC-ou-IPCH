@@ -1,4 +1,6 @@
 library(tidyverse)
+library(data.table)
+library(zoo)
 
 IPC_ou_IPCH_idbanks <- tribble(~ IDBANK, ~ IPC_ou_IPCH,
                                "001759970", "IPC", # IPC mensuel
@@ -67,19 +69,20 @@ figureA2 <- indicefp |>
 figureA2 |>
   ggplot() + geom_line(aes(x = date, y = OBS_VALUE, color = variable)) + theme_minimal() +
   scale_x_date(breaks = as.Date(paste0(c(seq(1999, 2100, 5), seq(1997, 2100, 5)), "-01-01")),
-               labels = date_format("%Y")) +
+               labels = scales::date_format("%Y")) +
   theme(legend.position = c(0.43, 0.12),
         legend.title = element_blank()) +
   scale_y_log10(breaks = seq(1, 0.02, -0.02),
-                labels = percent(seq(1, 0.02, -0.02)-1, acc = 1)) + 
+                labels = scales::percent(seq(1, 0.02, -0.02)-1, acc = 1)) + 
   ylab("") + xlab("") +
   geom_text(data = figureA2 |> 
               filter((year(date) %in% seq(2009, 2019, 5) & month(date) == 1)),
-            aes(x = date, y = OBS_VALUE, label = percent(OBS_VALUE-1, acc = 0.1)), 
+            aes(x = date, y = OBS_VALUE, label = scales::percent(OBS_VALUE-1, acc = 0.1)), 
             fontface ="bold", color = "black", size = 3) +
   geom_label(data = filter(figureA2, date == max(date)),
-             aes(x = date, y = OBS_VALUE, label = percent(OBS_VALUE-1, acc = 0.1), color = variable), 
-             fontface ="bold", size = 3)
+             aes(x = date, y = OBS_VALUE, label = scales::percent(OBS_VALUE-1, acc = 0.1), color = variable), 
+             fontface ="bold", size = 3) +
+  labs(caption = "Source: Insee, barèmes IPP, calculs de l’auteur")
 
-ggsave("figureA2.png", width = 1.25*6, height = 1.25*3.375)
+ggsave("figureA2.png", width = 1.25*6, height = 1.25*3.375, bg = "white")
 ggsave("figureA2.pdf", width = 1.25*6, height = 1.25*3.375)
