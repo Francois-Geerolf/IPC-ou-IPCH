@@ -1,6 +1,21 @@
 # Inflation en France : IPC ou IPCH ?
 
+Date de publication: 9 juillet 2024.
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22982973.svg)](https://doi.org/10.5281/zenodo.22982973)
+
 Ce dépôt met à disposition des codes de réplication pour la [note en lien](https://fgeerolf.com/IPC-ou-IPCH.pdf), ainsi que des outils pour calculer des évolutions en euros constants à partir de l'IPCH, plutôt que de l'IPC.
+
+<p align="center">
+
+  <!-- Reader Navigation -->
+  **[📖 Lire en ligne](https://fgeerolf.com/IPC-ou-IPCH.html)** •
+  **[📄 Version PDF](https://fgeerolf.com/IPC-ou-IPCH.pdf)** •
+  **[🌐 Présentation HTML](https://fgeerolf.com/IPC-ou-IPCH-handouts.html)**•
+  **[📓 Présentation PDF](https://fgeerolf.com/IPC-ou-IPCH-slides.pdf)** 
+
+</p>
+
 
 ## Réplication
 
