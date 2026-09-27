@@ -8,33 +8,33 @@ Le dépôt contient de quoi répliquer les figures et les données de la [note e
 
 ### Table 1 : Inflation selon l’IPC ou l’IPCH.
 
-[Code R](table1.R)
+[Code R](R/table1.R)
 
-![Table 1](table1.png)
+![Table 1](png/table1.png)
 
 ### Figure 1 : Poids et évolution de l’indice santé dans l’IPC et dans l’IPCH.
 
-[Code R](figure1.R)
+[Code R](R/figure1.R)
 
-![Figure 1](figure1.png)
+![Figure 1](png/figure1.png)
 
 ### Figure 2 : Évolution des salaires annuels « en euros constants » par catégorie socio-professionnelle, en utilisant l’inflation IPC et en utilisant l’inflation IPCH.
 
-[Code R](figure2.R)
+[Code R](R/figure2.R)
 
-![Figure 2](figure2.png)
+![Figure 2](png/figure2.png)
 
 ### Figure A1 : Poids de l’enseignement dans l’IPC et dans l’IPCH.
 
-[Code R](figureA1.R)
+[Code R](R/figureA1.R)
 
-![FigureA1](figureA1.png)
+![FigureA1](png/figureA1.png)
 
 ### Figure A2 : Pouvoir d’achat du point d’indice net de la fonction publique, IPC vs. IPCH.
 
-[Code R](figureA2.R)
+[Code R](R/figureA2.R)
 
-![FigureA2](figureA2.png)
+![FigureA2](png/figureA2.png)
 
 ## Outils pour calculer des évolutions en euros constants
 
