@@ -28,5 +28,5 @@ figureA1 %>%
                      labels = scales::percent_format(accuracy = .1)) +
   labs(caption = "Source: Insee")
 
-ggsave("figureA1.png", width = 1.25*6, height = 1.25*3.375, bg = "white")
-ggsave("figureA1.pdf", width = 1.25*6, height = 1.25*3.375)
+ggsave(here::here("png", "figureA1.png"), width = 1.25*6, height = 1.25*3.375, bg = "white")
+ggsave(here::here("pdf", "figureA1.pdf"), width = 1.25*6, height = 1.25*3.375)

@@ -57,5 +57,5 @@ figure1_B
 
 ggarrange(figure1_A, figure1_B, common.legend = T)
 
-ggsave("figure1.png", width = 1.25*6, height = 1.25*3.375, bg = "white")
-ggsave("figure1.pdf", width = 1.25*6, height = 1.25*3.375)
+ggsave(here::here("png", "figure1.png"), width = 1.25*6, height = 1.25*3.375, bg = "white")
+ggsave(here::here("pdf", "figure1.pdf"), width = 1.25*6, height = 1.25*3.375)

@@ -40,10 +40,10 @@ table1 <- paste(table1_idbanks, collapse = "+") |>
   gt::tab_footnote("Source: Insee, calculs de l'auteur")
 
 table1  |>
-  gt::gtsave(filename = "table1.png")
+  gt::gtsave(filename = here::here("png", "table1.png"))
 
 table1  |>
-  gt::gtsave(filename = "table1.pdf")
+  gt::gtsave(filename = here::here("pdf", "table1.pdf"))
 
-system("pdfcrop table1.pdf table1.pdf")
+if (nzchar(Sys.which("pdfcrop"))) system2("pdfcrop", rep(here::here("pdf", "table1.pdf"), 2))
 

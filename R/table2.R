@@ -28,10 +28,10 @@ table2 <- paste(table2_idbanks, collapse = "+") |>
   )
 
 table2  |>
-  gt::gtsave(filename = "table2.png")
+  gt::gtsave(filename = here::here("png", "table2.png"))
 
 table2  |>
-  gt::gtsave(filename = "table2.pdf")
+  gt::gtsave(filename = here::here("pdf", "table2.pdf"))
 
-system("pdfcrop table2.pdf table2.pdf")
+if (nzchar(Sys.which("pdfcrop"))) system2("pdfcrop", rep(here::here("pdf", "table2.pdf"), 2))
 

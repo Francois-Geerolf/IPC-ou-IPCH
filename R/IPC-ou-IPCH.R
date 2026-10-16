@@ -5,7 +5,7 @@ library("readxl")
 
 
   
-`IPC-ou-IPCH` <- "https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/001759970+001759971" |>
+IPC_ou_IPCH_trimestriel <- "https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/001759970+001759971" |>
     readSDMX() |>
     as_tibble() |>
     mutate(IDBANK,
@@ -19,4 +19,4 @@ library("readxl")
     ungroup() |>
     transmute(IPC_ou_IPCH = ifelse(grepl("harmonisé", TITLE_FR), "IPCH", "IPC"), TIME_PERIOD, OBS_VALUE)
   
-save(IPC_ou_IPCH_trimestriel, file = "IPC_ou_IPCH_trimestriel.RData")
+save(IPC_ou_IPCH_trimestriel, file = here::here("IPC_ou_IPCH_trimestriel.RData"))

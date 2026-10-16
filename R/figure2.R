@@ -48,12 +48,12 @@ figure2 %>%
   theme_minimal() + ylab("") + xlab("") +
   #scale_color_manual(values = c("darkgrey", "#F8766D", "#619CFF")) +
   scale_x_date(breaks = seq(1996, 2100, 2) %>% paste0("-01-01") %>% as.Date,
-               labels = date_format("%Y")) +
+               labels = scales::date_format("%Y")) +
   theme(legend.position = c(0.3, 0.8),
         legend.title = element_blank()) +
   scale_y_log10(breaks = seq(0, 200, 1)) +
   geom_hline(yintercept = 100, linetype = "dashed") +
   labs(caption = "Source: Insee, calculs de l'auteur")
 
-ggsave("figure2.png", width = 1.25*6, height = 1.25*3.375, bg = "white")
-ggsave("figure2.pdf", width = 1.25*6, height = 1.25*3.375)
+ggsave(here::here("png", "figure2.png"), width = 1.25*6, height = 1.25*3.375, bg = "white")
+ggsave(here::here("pdf", "figure2.pdf"), width = 1.25*6, height = 1.25*3.375)

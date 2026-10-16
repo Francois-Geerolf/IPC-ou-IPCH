@@ -10,8 +10,26 @@ IPC_ou_IPCH_idbanks <- tribble(~ IDBANK, ~ IPC_ou_IPCH,
 min_date <- as.Date("1999-01-01")
 max_date <- as.Date("2024-06-01")
 
-indicefp <- fread("https://www.ipp.eu/wp-content/themes/ipp/baremes/marche-du-travail/remuneration_dans_fonction_publique/indicefp/indicefp.csv") |>
-  mutate(date = as.Date(date)) |>
+# L'IPP a déplacé ses barèmes vers baremes.ipp.eu (l'ancien CSV renvoie 404).
+# Les valeurs sont des chaînes au format français, en euros depuis 2002 et en
+# francs avant ("339,9 FRF", "1 500 AFRF") : conversion en euros courants.
+FRF_PER_EUR <- 6.55957
+parse_ipp_number <- function(x) {
+  unit <- case_when(grepl("AFRF", x) ~ "AFRF",
+                    grepl("FRF", x) ~ "FRF",
+                    grepl("€", x) ~ "EUR",
+                    TRUE ~ NA_character_)
+  value <- as.numeric(gsub(",", ".", gsub("[^0-9,]", "", x)))
+  case_when(unit == "EUR" ~ value,
+            unit == "FRF" ~ value / FRF_PER_EUR,
+            unit == "AFRF" ~ value / 100 / FRF_PER_EUR,
+            TRUE ~ NA_real_)
+}
+
+indicefp <- fread("https://baremes.ipp.eu/parameters/marche-du-travail/marche_travail.remuneration_dans_fonction_publique.point_indice/csv") |>
+  transmute(date = as.Date(date, format = "%d/%m/%Y"),
+            point_indice_en_euros = parse_ipp_number(`marche_travail.remuneration_dans_fonction_publique.point_indice`)) |>
+  arrange(desc(date)) |>
   arrange(desc(date)) |>
   # Add today's date to be equal ------
 slice(1, 1:n()) |>
@@ -84,5 +102,5 @@ figureA2 |>
              fontface ="bold", size = 3) +
   labs(caption = "Source: Insee, barèmes IPP, calculs de l’auteur")
 
-ggsave("figureA2.png", width = 1.25*6, height = 1.25*3.375, bg = "white")
-ggsave("figureA2.pdf", width = 1.25*6, height = 1.25*3.375)
+ggsave(here::here("png", "figureA2.png"), width = 1.25*6, height = 1.25*3.375, bg = "white")
+ggsave(here::here("pdf", "figureA2.pdf"), width = 1.25*6, height = 1.25*3.375)
