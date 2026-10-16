@@ -1,15 +1,14 @@
 library(tidyverse)
 library(ggpubr)
 library(scales)
+source(here::here("R", "update-helpers.R"))
 
-# Base 2025 (COICOP 2018), rétropolée depuis 1996 : les séries base 2015 sont arrêtées fin 2025
-figure1_idbanks_A <- c("011812813", "011816286") # Pondérations santé IPCH, IPC
-figure1_idbanks_B <- c("011812814", "011816281") # Indices santé IPCH, IPC (mensuels)
+figure1_idbanks_A <- c("001763117", "001766089") # Pondérations santé IPCH, IPC (base 2015)
+figure1_idbanks_A_2025 <- c("011812813", "011816286") # idem, base 2025
+figure1_idbanks_B <- c("001763012", "001763620") # Indices santé IPCH, IPC (base 2015)
+figure1_idbanks_B_2025 <- c("011812814", "011816281") # idem, base 2025
 
-figure1_A <- paste(figure1_idbanks_A, collapse = "+") |>
-  paste0("https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/", i = _) |>
-  rsdmx::readSDMX() |>
-  tibble::as_tibble() |>
+figure1_A <- chainer_base2025(figure1_idbanks_A, figure1_idbanks_A_2025, rebase = FALSE) |>
   transmute(date = as.Date(paste0(TIME_PERIOD, "-01-01")),
          OBS_VALUE = as.numeric(OBS_VALUE),
          `IPC ou IPCH ?` = case_when(grepl("harmonisé", TITLE_FR) ~ "IPCH",
@@ -29,10 +28,7 @@ figure1_A
 
 
 
-figure1_B <- paste(figure1_idbanks_B, collapse = "+") |>
-  paste0("https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/", i = _) |>
-  rsdmx::readSDMX() |>
-  tibble::as_tibble() |>
+figure1_B <- chainer_base2025(figure1_idbanks_B, figure1_idbanks_B_2025) |>
   transmute(date = as.Date(paste0(TIME_PERIOD, "-01")),
             OBS_VALUE = as.numeric(OBS_VALUE),
             `IPC ou IPCH ?` = case_when(grepl("harmonisé", TITLE_FR) ~ "IPCH",
