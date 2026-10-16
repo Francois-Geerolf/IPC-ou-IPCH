@@ -11,12 +11,15 @@ annuel <- insee_bdm(c("001764363", # IPC annuel
                       "001762489")) # IPCH annuel
 
 dernier_mois <- min(tapply(mensuel$TIME_PERIOD, mensuel$IDBANK, max))
+# Départ : premier mois où les deux indices existent (l'IPCH commence en janvier 1996) ;
+# l'écart IPCH/IPC est positif dès le mois suivant et ne se referme jamais ensuite.
+depart <- max(tapply(mensuel$TIME_PERIOD, mensuel$IDBANK, min))
 il_y_a_3_ans <- format(as.Date(paste0(dernier_mois, "-01")) - years(3), "%Y-%m")
 annees <- as.character(2022:max(annuel$TIME_PERIOD))
 mois_fr <- function(x) str_to_title(format(as.Date(paste0(x, "-01")), "%B %Y"))
 
 table1 <- bind_rows(mensuel, annuel) |>
-  filter(TIME_PERIOD %in% c("1999-06", il_y_a_3_ans, dernier_mois, as.character(2021:2100))) |>
+  filter(TIME_PERIOD %in% c(depart, il_y_a_3_ans, dernier_mois, as.character(2021:2100))) |>
   transmute(TIME_PERIOD,
             OBS_VALUE,
             `IPC ou IPCH ?` = case_when(grepl("harmonisé", TITLE_FR) ~ "Inflation IPCH",
@@ -29,8 +32,8 @@ for (a in annees) {
 
 table1 <- table1 |>
   mutate(g3a = .data[[dernier_mois]] / .data[[il_y_a_3_ans]] - 1,
-         g99 = .data[[dernier_mois]] / `1999-06` - 1) |>
-  select(`IPC ou IPCH ?`, starts_with("infl"), g3a, g99) |>
+         g_depart = .data[[dernier_mois]] / .data[[depart]] - 1) |>
+  select(`IPC ou IPCH ?`, starts_with("infl"), g3a, g_depart) |>
   gt::gt() |>
   gt::fmt_percent(
     columns = -1,
@@ -44,7 +47,7 @@ table1 <- table1 |>
   gt::cols_label(
     .list = c(setNames(map(annees, ~ gt::html(paste0(.x, "<br>Annuelle"))), paste0("infl", annees)),
               list(g3a = gt::html(paste0(mois_fr(il_y_a_3_ans), " - ", mois_fr(dernier_mois), "<br>Glissement sur 3 ans")),
-                   g99 = gt::html(paste0("Juin 1999 - ", mois_fr(dernier_mois), "<br>Glissement depuis juin 1999"))))
+                   g_depart = gt::html(paste0(mois_fr(depart), " - ", mois_fr(dernier_mois), "<br>Glissement depuis ", tolower(mois_fr(depart))))))
   ) |>
   gt::tab_footnote("Source: Insee, calculs de l'auteur. Séries base 2015 prolongées par la base 2025 à partir de janvier 2026.")
 
